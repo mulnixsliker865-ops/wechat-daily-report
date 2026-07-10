@@ -1,0 +1,48 @@
+{
+  "days": {
+    "2026-07-09": {
+      "roles": {
+        "green": {
+          "broadcastLeads": "0",
+          "broadcastSpend": "0",
+          "officialLeads": "6",
+          "officialSpend": "2079",
+          "broadcastLeadsMonthManual": "67",
+          "broadcastSpendMonthManual": "110044",
+          "officialLeadsMonthManual": "54",
+          "officialSpendMonthManual": "33946",
+          "dianpingSpend": "3500"
+        },
+        "blue": {
+          "douyinLeads": "3",
+          "douyinSpend": "1697.02",
+          "localPushSpend": "30951.46",
+          "localPushLeads": "53",
+          "momentsSpend": "3710.4",
+          "momentsLeads": "5"
+        },
+        "purple": {
+          "dispatchToday": "4",
+          "dispatchMonth": "38",
+          "ordersMonth": "5",
+          "dispatchTomorrow": "5",
+          "dispatchTomorrowNote": "首客到店2、量房派单3"
+        },
+        "orange": {
+          "naturalVisits": "11",
+          "naturalOrders": "1"
+        }
+      },
+      "submitted": {
+        "green": true,
+        "blue": true,
+        "purple": true,
+        "orange": true
+      }
+    },
+    "2026-07-10": {
+      "roles": {},
+      "submitted": {}
+    }
+  }
+}

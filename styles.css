@@ -1,0 +1,518 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --text: #20242c;
+  --muted: #6b7280;
+  --border: #d8dde6;
+  --line: #edf0f5;
+  --green: #c8f1c8;
+  --green-strong: #20bd4a;
+  --blue: #d9e5ff;
+  --blue-strong: #3d6df6;
+  --purple: #e4d1ff;
+  --purple-strong: #8a55d7;
+  --orange: #ffd9b0;
+  --orange-strong: #e27a20;
+  --shadow: 0 14px 40px rgba(18, 31, 56, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.app {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 18px 14px 34px;
+}
+
+.phone-shell {
+  min-height: calc(100vh - 36px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 58px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.topbar p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ghost-btn,
+.primary-btn,
+.copy-btn {
+  min-height: 38px;
+  padding: 0 13px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.ghost-btn {
+  color: var(--text);
+  background: #f0f2f6;
+}
+
+.primary-btn,
+.copy-btn {
+  color: #fff;
+  background: #1f2937;
+}
+
+.content {
+  padding: 18px 14px 22px;
+}
+
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.field label,
+.input-block label {
+  display: block;
+  margin-bottom: 7px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+}
+
+input {
+  height: 42px;
+  padding: 0 11px;
+}
+
+textarea {
+  min-height: 82px;
+  padding: 10px 11px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+.role-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.role-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: 14px;
+  width: 100%;
+  min-height: 98px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+}
+
+.role-card .stripe {
+  width: 8px;
+  border-radius: 999px;
+}
+
+.role-card h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.role-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.role-card.green .stripe {
+  background: var(--green-strong);
+}
+
+.role-card.blue .stripe {
+  background: var(--blue-strong);
+}
+
+.role-card.purple .stripe {
+  background: var(--purple-strong);
+}
+
+.role-card.orange .stripe {
+  background: var(--orange-strong);
+}
+
+.status-card {
+  display: grid;
+  gap: 14px;
+  padding: 26px 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.status-number {
+  display: inline-grid;
+  place-items: center;
+  justify-self: center;
+  width: 86px;
+  height: 54px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 750;
+}
+
+.progress-list {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+}
+
+.progress-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  background: #f7f8fb;
+  color: #374151;
+  font-size: 14px;
+}
+
+.progress-item.done {
+  color: #0f5d2a;
+  background: #eaf8ee;
+}
+
+.section-title {
+  margin: 22px 0 12px;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.input-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfcfe;
+}
+
+.yesterday {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.helper {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.role-note {
+  margin-bottom: 14px;
+  padding: 11px 12px;
+  border: 1px solid #dce7ff;
+  border-radius: 10px;
+  background: #f7faff;
+  color: #41506a;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 9;
+  transform: translateX(-50%);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #111827;
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.preview-wrap {
+  display: grid;
+  gap: 14px;
+}
+
+.preview-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.report-preview {
+  min-height: 70vh;
+  padding: 6px 2px 24px;
+  white-space: pre-wrap;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.report-preview .title {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.report-preview .subtitle {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.mark {
+  display: inline;
+  padding: 1px 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.mark.green {
+  background: var(--green);
+}
+
+.mark.blue {
+  background: var(--blue);
+}
+
+.mark.purple {
+  background: var(--purple);
+}
+
+.mark.orange {
+  background: var(--orange);
+}
+
+.empty-note {
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (min-width: 760px) {
+  .app {
+    padding-top: 28px;
+  }
+
+  .phone-shell {
+    min-height: auto;
+  }
+
+  .role-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .input-block.wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    background: #fff;
+  }
+
+  .app {
+    width: 100%;
+    padding: 0;
+  }
+
+  .phone-shell {
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .topbar {
+    min-height: 62px;
+    padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+  }
+
+  .topbar h1 {
+    font-size: 17px;
+  }
+
+  .topbar p {
+    max-width: 46vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .ghost-btn,
+  .primary-btn,
+  .copy-btn {
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  .content {
+    padding: 16px 12px 28px;
+  }
+
+  .date-row {
+    grid-template-columns: 1fr;
+  }
+
+  .role-grid {
+    gap: 10px;
+  }
+
+  .role-card {
+    min-height: 90px;
+    padding: 14px;
+  }
+
+  .role-card h2 {
+    font-size: 17px;
+  }
+
+  .form-grid {
+    gap: 12px;
+  }
+
+  .input-block {
+    padding: 12px;
+  }
+
+  .input-block label {
+    font-size: 14px;
+  }
+
+  input {
+    height: 46px;
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 96px;
+    font-size: 16px;
+  }
+
+  .status-card {
+    padding: 24px 14px;
+  }
+
+  .report-preview {
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  .report-preview .title {
+    font-size: 23px;
+  }
+
+  .report-preview .subtitle {
+    font-size: 18px;
+  }
+}
