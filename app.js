@@ -81,8 +81,14 @@ const MONTH_BASE_FIELDS = {
 const app = document.querySelector("#app");
 
 function loadState() {
-  const remote = requestState();
+  const remote = requestState("./api/state");
   if (remote) return remote;
+  const seed = requestState("./data/state.json") || { days: {} };
+  const local = readLocalState();
+  return mergeStates(seed, local);
+}
+
+function readLocalState() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { days: {} };
   } catch {
@@ -90,16 +96,33 @@ function loadState() {
   }
 }
 
+function mergeStates(base, overlay) {
+  const merged = { days: { ...(base?.days || {}) } };
+  for (const [date, day] of Object.entries(overlay?.days || {})) {
+    merged.days[date] = {
+      roles: {
+        ...(merged.days[date]?.roles || {}),
+        ...(day.roles || {})
+      },
+      submitted: {
+        ...(merged.days[date]?.submitted || {}),
+        ...(day.submitted || {})
+      }
+    };
+  }
+  return merged;
+}
+
 function saveState(state) {
   if (sendState(state)) return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-function requestState() {
+function requestState(url = "./api/state") {
   if (!location.protocol.startsWith("http")) return null;
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "./api/state", false);
+    xhr.open("GET", url, false);
     xhr.send();
     if (xhr.status === 200) return JSON.parse(xhr.responseText);
   } catch {
