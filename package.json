@@ -1,0 +1,16 @@
+{
+  "name": "wechat-daily-report",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8779",
+    "build": "next build",
+    "start": "next start -p 8779"
+  },
+  "dependencies": {
+    "next": "^15.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {}
+}

@@ -10,6 +10,24 @@ https://你的用户名.github.io/wechat-daily-report/
 
 静态版可以填写、预览、复制，也能在当前浏览器里自动计算；但数据保存在每个人自己的浏览器里，不能共享填写人数和全员累计。
 
+多人共享线上版需要用后端：
+
+```bash
+npm install
+npm run dev
+```
+
+需要配置环境变量：
+
+```text
+FEISHU_APP_ID
+FEISHU_APP_SECRET
+FEISHU_BASE_APP_TOKEN
+FEISHU_TABLE_ID
+```
+
+共享版会把每个日期、每个颜色负责人的提交写进飞书多维表，预览页再从飞书读取合并后的数据生成固定播报。
+
 共享版本地服务：
 
 ```bash
