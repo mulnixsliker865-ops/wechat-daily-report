@@ -79,13 +79,24 @@ const MONTH_BASE_FIELDS = {
 };
 
 const app = document.querySelector("#app");
+const stateCache = {
+  value: null,
+  expiresAt: 0
+};
 
 function loadState() {
+  if (stateCache.value && Date.now() < stateCache.expiresAt) return stateCache.value;
   const remote = requestState("./api/state");
-  if (remote?.days) return remote;
+  if (remote?.days) return rememberState(remote);
   const seed = requestState("./data/state.json") || { days: {} };
   const local = readLocalState();
-  return mergeStates(seed, local);
+  return rememberState(mergeStates(seed, local));
+}
+
+function rememberState(state) {
+  stateCache.value = state;
+  stateCache.expiresAt = Date.now() + 20_000;
+  return state;
 }
 
 function readLocalState() {
@@ -114,6 +125,7 @@ function mergeStates(base, overlay) {
 }
 
 function saveState(state) {
+  rememberState(state);
   if (sendState(state)) return;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -138,6 +150,10 @@ function sendState(state) {
     xhr.open("POST", "./api/state", false);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.send(JSON.stringify(state));
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const remote = JSON.parse(xhr.responseText);
+      if (remote?.days) rememberState(remote);
+    }
     return xhr.status >= 200 && xhr.status < 300;
   } catch {
     return false;
