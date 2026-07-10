@@ -164,7 +164,6 @@ function cnDate(dateKey) {
 function stateForDate(dateKey) {
   const state = loadState();
   state.days[dateKey] ||= { roles: {}, submitted: {} };
-  saveState(state);
   return state.days[dateKey];
 }
 

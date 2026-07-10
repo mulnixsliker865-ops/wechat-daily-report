@@ -54,6 +54,11 @@ const REQUIRED_FIELDS = [
 ];
 const TEXT_FIELD_TYPE = 1;
 const tokenCache = { value: "", expiresAt: 0 };
+const runtimeCache = {
+  fieldsEnsured: false,
+  state: null,
+  stateExpiresAt: 0
+};
 
 function json(payload, init = {}) {
   return new Response(JSON.stringify(payload), {
@@ -139,6 +144,7 @@ async function listFields(env, token) {
 }
 
 async function ensureFields(env, token) {
+  if (runtimeCache.fieldsEnsured) return;
   const { appToken, tableId } = feishuConfig(env);
   const fields = await listFields(env, token);
   const existing = new Set(fields.map(field => field.field_name));
@@ -153,6 +159,7 @@ async function ensureFields(env, token) {
       }
     });
   }
+  runtimeCache.fieldsEnsured = true;
 }
 
 async function listRecords(env, token) {
@@ -263,6 +270,7 @@ async function upsertSubmittedRows(env, token, incomingState, currentRecords) {
 }
 
 async function getState(env) {
+  if (runtimeCache.state && Date.now() < runtimeCache.stateExpiresAt) return runtimeCache.state;
   const seed = seedState();
   if (!env.FEISHU_APP_ID || !env.FEISHU_APP_SECRET || !env.FEISHU_BASE_APP_TOKEN || !env.FEISHU_TABLE_ID) {
     return seed;
@@ -270,7 +278,9 @@ async function getState(env) {
   const token = await tenantToken(env);
   await ensureFields(env, token);
   const records = await listRecords(env, token);
-  return recordsToState(records, seed);
+  runtimeCache.state = recordsToState(records, seed);
+  runtimeCache.stateExpiresAt = Date.now() + 30_000;
+  return runtimeCache.state;
 }
 
 async function mergeState(env, incomingState) {
@@ -281,6 +291,8 @@ async function mergeState(env, incomingState) {
   await ensureFields(env, token);
   const records = await listRecords(env, token);
   await upsertSubmittedRows(env, token, incomingState, records);
+  runtimeCache.state = null;
+  runtimeCache.stateExpiresAt = 0;
   return getState(env);
 }
 
