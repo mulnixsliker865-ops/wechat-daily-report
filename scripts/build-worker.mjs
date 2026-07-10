@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const outDir = path.join(root, ".open-next");
 const assetsDir = path.join(outDir, "assets");
+fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(assetsDir, { recursive: true });
 
 const appJs = fs.readFileSync(path.join(root, "public", "app.js"), "utf8");
