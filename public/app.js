@@ -82,7 +82,7 @@ const app = document.querySelector("#app");
 
 function loadState() {
   const remote = requestState("./api/state");
-  if (remote) return remote;
+  if (remote?.days) return remote;
   const seed = requestState("./data/state.json") || { days: {} };
   const local = readLocalState();
   return mergeStates(seed, local);
